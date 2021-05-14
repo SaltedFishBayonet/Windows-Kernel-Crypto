@@ -54,7 +54,6 @@ Preview
 base64: 
 <p align="center">
 <img  src="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto/blob/master/base64.gif" alt="Awesome-Cryptography">
-<img  src="http://120.53.223.74:8848/base64.gif" alt="Awesome-Cryptography">
 </p>
 
 
