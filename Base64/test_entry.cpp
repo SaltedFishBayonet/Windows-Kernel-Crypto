@@ -1,21 +1,21 @@
 extern "C" {
 #include <ntddk.h>
 }
-#include "crypto_base64.hpp"
+#include "KernelCrypto.hpp"
 
-/* Ê¹ÓÃÊ¾Àı */
+/* ä½¿ç”¨ç¤ºä¾‹ */
 VOID Test_Base64() {
 	ANSI_STRING str;
-	RtlInitAnsiString(&str, "abc test ²âÊÔ 123456");
-	DbgPrint("ÊäÈë(input):%Z \r\n", &str);
+	RtlInitAnsiString(&str, "abc test æµ‹è¯• 123456");
+	DbgPrint("è¾“å…¥(input):%Z \r\n", &str);
 
 	ANSI_STRING cipher = { 0 };
 	base64::Encode(&cipher, &str);
-	DbgPrint("±àÂëºó(Encode):%Z \r\n", &cipher);
+	DbgPrint("ç¼–ç å(Encode):%Z \r\n", &cipher);
 
 	ANSI_STRING decode = { 0 };
 	base64::Decode(&decode, &cipher);
-	DbgPrint("½âÂë½á¹û(Decode):%Z \r\n", &decode);
+	DbgPrint("è§£ç ç»“æœ(Decode):%Z \r\n", &decode);
 
 	ExFreePool_(cipher.Buffer);
 	ExFreePool_(decode.Buffer);
