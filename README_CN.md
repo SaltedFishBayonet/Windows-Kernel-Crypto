@@ -49,8 +49,6 @@
 	<a target="_blank" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/other-wdk-downloads">
 		<img src="http://120.53.223.74:8848/Environment_English_blue.svg" />
 	</a>
-	<a target="_blank" href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/other-wdk-downloads">
-		<img src="http://120.53.223.74:8848/Environment_Chinese_blue.svg" />
 	</a>
 </p>
 
