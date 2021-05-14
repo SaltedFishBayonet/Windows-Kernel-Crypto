@@ -5,7 +5,7 @@
   <strong>适用于所有windows内核的可扩展、高性能、单文件、无依赖的内核加密解决方案</strong>
 </p>
 <p align="center">
-  <a href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto/README.md">English</a> | 简体中文
+  <a href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto">English</a> | 简体中文
 </p>
 
 <p align="center">
