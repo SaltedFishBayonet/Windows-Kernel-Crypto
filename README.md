@@ -5,7 +5,7 @@
   <strong>Extensible,high-performance,single file,dependent kernel encryption solution for all Windows kernels</strong>
 </p>
 <p align="center">
-  English | <a href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto/README_CN.md">简体中文</a>
+  English | <a href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto/blob/master/README_CN.md">简体中文</a>
 </p>
 
 <p align="center">
