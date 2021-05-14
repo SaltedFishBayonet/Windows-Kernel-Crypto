@@ -1,6 +1,6 @@
 #pragma once
 
-// Ó¦ÓÃ²ãÊ¹ÓÃÊ±×¢ÊÍÏÂÃæÕâĞĞ£¬ÄÚºËÊ¹ÓÃÊ±ÆôÓÃÕâ¸ö
+// åº”ç”¨å±‚ä½¿ç”¨æ—¶æ³¨é‡Šä¸‹é¢è¿™è¡Œï¼Œå†…æ ¸ä½¿ç”¨æ—¶å¯ç”¨è¿™ä¸ª
 #define R0_MODEL_CRYPTO 1
 
 
@@ -94,7 +94,7 @@ namespace base64 {
 		return 0xFF; // ERROR Value
 	}
 
-	/* ĞèÔÚÍâ²¿ÊÖ¶¯ÊÍ·Å  OUT PANSI_STRING out ÖĞbufferµÄÄÚ´æ */
+	/* éœ€åœ¨å¤–éƒ¨æ‰‹åŠ¨é‡Šæ”¾  OUT PANSI_STRING out ä¸­bufferçš„å†…å­˜ */
 	inline VOID Encode(OUT PANSI_STRING out, IN PANSI_STRING src, IN LONG shfit = 0, IN POOL_TYPE type = NonPagedPool) {
 		USHORT oldSize = src->Length;
 		USHORT outSize = ((oldSize + 2) / 3) * 4;
@@ -108,17 +108,17 @@ namespace base64 {
 
 		for (ULONG i = 0; i < oldSize; i += 3) {
 			enc[j++] = _B64_TABLE[data[i] >> 2];
-			if (i + 2 < oldSize) {	// ÖÁÉÙ»¹Ê£ 3 byte
+			if (i + 2 < oldSize) {	// è‡³å°‘è¿˜å‰© 3 byte
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + (data[i + 1] >> 4)];
 				enc[j++] = _B64_TABLE[((data[i + 1] & 0x0F) << 2) + (data[i + 2] >> 6)];
 				enc[j++] = _B64_TABLE[data[i + 2] & 0x3F];
 			}
-			else if (i + 1 < oldSize) {	// Ê£ 2 byte
+			else if (i + 1 < oldSize) {	// å‰© 2 byte
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + (data[i + 1] >> 4)];
 				enc[j++] = _B64_TABLE[((data[i + 1] & 0x0F) << 2) + 0];
 				enc[j++] = '=';
 			}
-			else {	// Ê£ 1 byte
+			else {	// å‰© 1 byte
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + 0];
 				enc[j++] = '=';
 				enc[j++] = '=';
@@ -126,7 +126,7 @@ namespace base64 {
 		}
 	}
 
-	/* ĞèÔÚÍâ²¿ ÊÖ¶¯ÊÍ·Å OUT PANSI_STRING out ÖĞ buffer µÄÄÚ´æ  */
+	/* éœ€åœ¨å¤–éƒ¨ æ‰‹åŠ¨é‡Šæ”¾ OUT PANSI_STRING out ä¸­ buffer çš„å†…å­˜  */
 	inline VOID Decode(OUT PANSI_STRING out, IN PANSI_STRING enc, IN LONG shfit = 0, IN POOL_TYPE type = NonPagedPool) {
 		USHORT encSize = enc->Length;
 		PUCHAR data = (PUCHAR)(enc->Buffer);
@@ -146,36 +146,36 @@ namespace base64 {
 			ch2 = __GetIndexByValue(data[i + 1]);
 			ch3 = __GetIndexByValue(data[i + 2]);
 
-			decode[j++] = (__GetIndexByValue(data[i]) << 2) + (ch2 >> 4); // ½âÂëµÃµ½1×Ö·û
+			decode[j++] = (__GetIndexByValue(data[i]) << 2) + (ch2 >> 4); // è§£ç å¾—åˆ°1å­—ç¬¦
 
-			// Èç¹û ²»ÊÇ×îºó4¸ö×Ö·ûµÄ½âÂë £¬Ôò¼ÌĞø½âÂë£¬µÃµ½ºóÃæ2¸ö×Ö·û
-			// »òÕß Ã»ÓĞ = µÄÇé¿öÏÂ(Ã»ÓĞ²¹Î»)£¬Ò²¼ÌĞø½âÂëºóÃæ2×Ö·û
+			// å¦‚æœ ä¸æ˜¯æœ€å4ä¸ªå­—ç¬¦çš„è§£ç  ï¼Œåˆ™ç»§ç»­è§£ç ï¼Œå¾—åˆ°åé¢2ä¸ªå­—ç¬¦
+			// æˆ–è€… æ²¡æœ‰ = çš„æƒ…å†µä¸‹(æ²¡æœ‰è¡¥ä½)ï¼Œä¹Ÿç»§ç»­è§£ç åé¢2å­—ç¬¦
 			if (i + 4 < encSize || fix == 0) {
 				decode[j++] = ((ch2 & 0x0F) << 4) + ((ch3 & 0x3C) >> 2);
 				decode[j++] = ((ch3 & 0x03) << 6) + (__GetIndexByValue(data[i + 3]) & 0x3F);
 			}
 			else if (fix == 1) {
-				// ×îºó4¸ö×Ö·û ÇÒ ÓĞÒ»¸ö = 
+				// æœ€å4ä¸ªå­—ç¬¦ ä¸” æœ‰ä¸€ä¸ª = 
 				decode[j++] = ((ch2 & 0x0F) << 4) + ((ch3 & 0x3C) >> 2);
 			}
-			// ÈôÓöµ½×îºó 2 ¸ö = Ê±£¬Ö»ÓÃÉú³ÉÒ»¸öÃ÷ÎÄ×Ö·û£¬ÒÑ¾­Ìá³öÈ¥ÁË£¬ÕâÀï²»´¦Àí
+			// è‹¥é‡åˆ°æœ€å 2 ä¸ª = æ—¶ï¼Œåªç”¨ç”Ÿæˆä¸€ä¸ªæ˜æ–‡å­—ç¬¦ï¼Œå·²ç»æå‡ºå»äº†ï¼Œè¿™é‡Œä¸å¤„ç†
 
 		}
 	}
 
-	/* Ê¹ÓÃÊ¾Àı */
+	/* ä½¿ç”¨ç¤ºä¾‹ */
 	//VOID Test_Base64() {
 	//	ANSI_STRING str;
-	//	RtlInitAnsiString(&str, "abc test ²âÊÔ 123456");
-	//	DbgPrint("ÊäÈë(input):%Z \r\n", &str);
+	//	RtlInitAnsiString(&str, "abc test æµ‹è¯• 123456");
+	//	DbgPrint("è¾“å…¥(input):%Z \r\n", &str);
 
 	//	ANSI_STRING cipher = { 0 };
 	//	base64::Encode(&cipher, &str);
-	//	DbgPrint("±àÂëºó(Encode):%Z \r\n", &cipher);
+	//	DbgPrint("ç¼–ç å(Encode):%Z \r\n", &cipher);
 
 	//	ANSI_STRING decode = { 0 };
 	//	base64::Decode(&decode, &cipher);
-	//	DbgPrint("½âÂë½á¹û(Decode):%Z \r\n", &decode);
+	//	DbgPrint("è§£ç ç»“æœ(Decode):%Z \r\n", &decode);
 
 	//	ExFreePool_(cipher.Buffer);
 	//	ExFreePool_(decode.Buffer);
