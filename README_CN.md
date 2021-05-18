@@ -16,14 +16,16 @@
 		<img src="http://120.53.223.74:8848/License_Apache_2_0.svg" />
 	</a>
 	<a target="_blank" href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto">
+		<img src="http://120.53.223.74:8848/License_Anti_996_blue.svg" />
+	</a>
+	<a target="_blank" href="https://996.icu">
+		<img src="http://120.53.223.74:8848/link_996_icu.svg" />
+	</a>
+	<a target="_blank" href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto">
 		<img src="http://120.53.223.74:8848/code_quality.svg" />
 	</a>
 	<a target="_blank" href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto">
 		<img src="http://120.53.223.74:8848/ci_passing.svg" />
-	</a>
-	<a target="_blank" href="https://github.com/SaltedFishBayonet/Windows-Kernel-Crypto">
-		<img src="http://120.53.223.74:8848/total_lines.svg" />
-	</a>
 </p>
 
 
