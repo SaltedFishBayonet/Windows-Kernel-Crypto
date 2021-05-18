@@ -108,17 +108,17 @@ namespace base64 {
 
 		for (ULONG i = 0; i < oldSize; i += 3) {
 			enc[j++] = _B64_TABLE[data[i] >> 2];
-			if (i + 2 < oldSize) {	// 至少还剩 3 byte
+			if (i + 2 < oldSize) {	
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + (data[i + 1] >> 4)];
 				enc[j++] = _B64_TABLE[((data[i + 1] & 0x0F) << 2) + (data[i + 2] >> 6)];
 				enc[j++] = _B64_TABLE[data[i + 2] & 0x3F];
 			}
-			else if (i + 1 < oldSize) {	// 剩 2 byte
+			else if (i + 1 < oldSize) {
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + (data[i + 1] >> 4)];
 				enc[j++] = _B64_TABLE[((data[i + 1] & 0x0F) << 2) + 0];
 				enc[j++] = '=';
 			}
-			else {	// 剩 1 byte
+			else {	
 				enc[j++] = _B64_TABLE[((data[i] & 0x03) << 4) + 0];
 				enc[j++] = '=';
 				enc[j++] = '=';
@@ -146,19 +146,19 @@ namespace base64 {
 			ch2 = __GetIndexByValue(data[i + 1]);
 			ch3 = __GetIndexByValue(data[i + 2]);
 
-			decode[j++] = (__GetIndexByValue(data[i]) << 2) + (ch2 >> 4); // 解码得到1字符
+			decode[j++] = (__GetIndexByValue(data[i]) << 2) + (ch2 >> 4); 
 
-			// 如果 不是最后4个字符的解码 ，则继续解码，得到后面2个字符
-			// 或者 没有 = 的情况下(没有补位)，也继续解码后面2字符
+			
+
 			if (i + 4 < encSize || fix == 0) {
 				decode[j++] = ((ch2 & 0x0F) << 4) + ((ch3 & 0x3C) >> 2);
 				decode[j++] = ((ch3 & 0x03) << 6) + (__GetIndexByValue(data[i + 3]) & 0x3F);
 			}
 			else if (fix == 1) {
-				// 最后4个字符 且 有一个 = 
+	
 				decode[j++] = ((ch2 & 0x0F) << 4) + ((ch3 & 0x3C) >> 2);
 			}
-			// 若遇到最后 2 个 = 时，只用生成一个明文字符，已经提出去了，这里不处理
+			
 
 		}
 	}
