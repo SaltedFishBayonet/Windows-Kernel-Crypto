@@ -31,7 +31,7 @@
 
 Feature
 =========================
-- Cryptography library for the `Windows` kernel, but also for the application layer
+- Cryptography library for the `Windows` kernel, also support application layer
 - support `AES256`、`AES256+CBC`、`RSA512`、`RSA1024`、`RSA2048`
 - Very pleasantly surprised, especially support `ECC256`, its performance is excellent, can replace the performance of a little less `RSA2048`
 - As a base encoding, `base64` is also supported, of course
@@ -65,11 +65,11 @@ base64:
 
 FAQ
 =========================
-## 1.Can a pure C kernel project be used?
+#### 1.Can a pure C kernel project be used?
 Visual Studio is a C++ compiler by default, so you can use it directly.
 If you really need the `.h`and`.c`file, then delete the`namespace`from them
 
-## 2.Which versions of Windows are available？
+#### 2.Which versions of Windows are available？
 Applicable to all versions of `windows`, because it is a native implementation, independent of the system
 
 
